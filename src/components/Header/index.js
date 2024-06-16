@@ -1,48 +1,87 @@
 import {Link, withRouter} from 'react-router-dom'
-import {MdHome} from 'react-icons/md'
-import {BsFillBriefcaseFill} from 'react-icons/bs'
 import Cookies from 'js-cookie'
+import {FiLogOut} from 'react-icons/fi'
+import {AiFillHome} from 'react-icons/ai'
+import {BsFillBriefcaseFill} from 'react-icons/bs'
+import './index.css'
 
 const Header = props => {
   const onClickLogout = () => {
-    Cookies.remove('jwt_token')
     const {history} = props
+    Cookies.remove('jwt_token')
     history.replace('/login')
   }
   return (
-    <nav className='nav-header'>
-      <ul>
-        <Link to='/'>
-          <li>
-            <img
-              src='https://assets.ccbp.in/frontend/react-js/logo-img.png'
-              alt='website logo'
-            />
-          </li>
-        </Link>
-        <Link to='/' className='nav-link'>
-          <li>
-            <h1>Home</h1>
-            <MdHome />
-          </li>
-        </Link>
-        <Link to='/jobs' className='nav-link'>
-          <li>
-            <BsFillBriefcaseFill />
-            <h1>Jobs</h1>
-          </li>
-        </Link>
-        <li>
-          <button
-            type='button'
-            className='logout-desktop-btn'
-            onClick={onClickLogout}
-          >
-            Logout
-          </button>
-        </li>
-      </ul>
-    </nav>
+    <>
+      <nav className="nav-header">
+        <div className="nav-content">
+          <div className="nav-bar-mobile-container">
+            <Link to="/">
+              <img
+                src="https://assets.ccbp.in/frontend/react-js/logo-img.png "
+                className="website-logo"
+                alt="website logo"
+              />
+            </Link>
+            <ul className="nav-bar-mobile-icons-container">
+              <li>
+                <Link to="/">
+                  <AiFillHome className="nav-item-mobile-link" />
+                </Link>
+              </li>
+              <li>
+                <Link to="/jobs">
+                  <BsFillBriefcaseFill className="nav-item-mobile-link" />
+                </Link>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  className="nav-mobile-btn"
+                  onClick={onClickLogout}
+                >
+                  Click
+                  <FiLogOut />
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div className="nav-bar-large-container">
+            <Link to="/">
+              <img
+                className="website-logo"
+                src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
+                alt="website logo"
+              />
+            </Link>
+            <ul className="nav-menu">
+              <li className="nav-menu-item">
+                <Link to="/" className="nav-link">
+                  Home
+                </Link>
+              </li>
+
+              <li className="nav-menu-item">
+                <Link to="/jobs" className="nav-link">
+                  Jobs
+                </Link>
+              </li>
+            </ul>
+            <div className="large-device-button-container">
+              <button
+                type="button"
+                className="logout-desktop-btn"
+                onClick={onClickLogout}
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </>
   )
 }
+
 export default withRouter(Header)
